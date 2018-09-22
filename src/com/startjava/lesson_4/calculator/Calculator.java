@@ -1,24 +1,18 @@
 package com.startjava.lesson_4.calculator;
 
 public class Calculator {	
-	private int firstNumber;
-	private int secondNumber;
-	private String operation;
+	private String[] mathExpression;
+    private int firstNumber;
+    private int secondNumber;
 
-	public void setFirstNumber(int firstNumber) {
-		this.firstNumber = firstNumber;
-	}
-	
-	public void setSecondNumber(int secondNumber) {
-		this.secondNumber = secondNumber;
-	}
-	
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
+    public  Calculator (String[] mathExpression) {
+        this.mathExpression = mathExpression;
+    }
 
 	public void calculate() {
-		switch (operation) {
+	    firstNumber = Integer.parseInt(mathExpression[0]);
+	    secondNumber = Integer.parseInt(mathExpression[2]);
+		switch (mathExpression[1]) {
 			case "+":
 				System.out.println(firstNumber + secondNumber);
 				break;

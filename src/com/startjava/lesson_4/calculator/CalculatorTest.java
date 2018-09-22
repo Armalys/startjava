@@ -8,7 +8,6 @@ public class CalculatorTest {
         String userInput;
         int i;
         String[] mathExpression = new String[3];
-        Calculator calculator = new Calculator();
         Scanner scanner = new Scanner(System.in);
 
         do {
@@ -19,9 +18,7 @@ public class CalculatorTest {
                 mathExpression[i] = symbol;
                 i++;
             }
-            calculator.setFirstNumber(Integer.parseInt(mathExpression[0]));
-            calculator.setOperation(mathExpression[1]);
-            calculator.setSecondNumber(Integer.parseInt(mathExpression[2]));
+            Calculator calculator = new Calculator(mathExpression);
             calculator.calculate();
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");
