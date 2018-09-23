@@ -8,9 +8,6 @@ public class GuessNumber {
     private int computerNumber;
     private Player playerOne;
     private Player playerTwo;
-    private int[] playerOneNumbers;
-    private int[] playerTwoNumbers = new int[10];
-    private int attempt;
 
     public GuessNumber(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
@@ -44,21 +41,21 @@ public class GuessNumber {
 
         if (playerOne.isStatus()) {
             System.out.println("Поздравляем, " + playerOne.getName() + ", ты угадал число с " + playerOne.getAttempt() + " попытки");
-            playerOneNumbers = Arrays.copyOf(playerOne.getNumbers(), playerOne.getAttempt());
+            int[] playerOneNumbers = Arrays.copyOf(playerOne.getNumbers(), playerOne.getAttempt());
             System.out.print("Твои варианты: ");
             for (int number : playerOneNumbers) {
                 System.out.print(number + " ");
             }
-            System.out.println("");
+            System.out.println();
 
         } else if (playerTwo.isStatus()) {
             System.out.println("Поздравляем, " + playerTwo.getName() + ", ты угадал число с " + playerTwo.getAttempt() + " попытки");
-            playerTwoNumbers = Arrays.copyOf(playerTwo.getNumbers(), playerTwo.getAttempt());
+            int[] playerTwoNumbers = Arrays.copyOf(playerTwo.getNumbers(), playerTwo.getAttempt());
             System.out.print("Твои варианты: ");
             for (int number : playerTwoNumbers) {
                 System.out.print(number + " ");
             }
-            System.out.println("");
+            System.out.println();
 
         } else {
             System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " кончались попытки");
@@ -66,13 +63,13 @@ public class GuessNumber {
             for (int number : playerOne.getNumbers()) {
                 System.out.print(number + " ");
             }
-            System.out.println("");
+            System.out.println();
 
             System.out.print(playerTwo.getName() + ", твои варианты: ");
             for (int number : playerTwo.getNumbers()) {
                 System.out.print(number + " ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
