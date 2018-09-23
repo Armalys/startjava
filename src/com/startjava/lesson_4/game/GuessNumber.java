@@ -1,11 +1,15 @@
 package com.startjava.lesson_4.game;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumber {
 	private int computerNumber;
 	private Player playerOne;
 	private Player playerTwo;
+	private int[] playerOneNumbers = new int[10];
+	private  int[] playerTwoNumbers = new  int[10];
+    private int attempt;
 
 	private Scanner scanner = new Scanner(System.in);
 
@@ -17,23 +21,57 @@ public class GuessNumber {
 	public void gameStart() {
 		System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
 		generateComputerNumber();
-		System.out.println("Компьютер загадал число, вам необходимо его отгадать");
+		System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
+        System.out.println(computerNumber);
 
 		while (true) {
 			System.out.print(playerOne.getName() + ", твоя попытка:");
-			playerOne.setNumber(scanner.nextInt());
-			System.out.print(playerTwo.getName() + ", твоя попытка:");			
-			playerTwo.setNumber(scanner.nextInt());
+            for (int i = 0; i < 10; i++) {
+                attempt = 0;
+                playerOne.setNumber(scanner.nextInt());
+                System.out.println(playerOne.getName() + ", y тебя осталось " + (9 - i) + " попыток");
+                playerOneNumbers[i] = playerOne.getNumber();
+            }
+            playerOne.setNumbers(playerOneNumbers);
 
-			if (playerOne.getNumber() == computerNumber) {
-				System.out.println("Поздравляем, " + playerOne.getName() + ", ты угадал!");
-				System.out.println("Это было число: " + computerNumber);
-				break;
-			} else if (playerTwo.getNumber() == computerNumber) {
-				System.out.println("Поздравляем, " + playerTwo.getName() + ", ты угадал!");
-				System.out.println("Это было число: " + computerNumber);
-				break;
-			}
+            System.out.print(playerTwo.getName() + ", твоя попытка:");
+            for (int i = 0; i < 10; i++) {
+                attempt = 0;
+                playerTwo.setNumber(scanner.nextInt());
+                System.out.println(playerTwo.getName() + ", y тебя осталось " + (9 - i) + " попыток");
+                playerTwoNumbers[i] = playerTwo.getNumber();
+            }
+            playerTwo.setNumbers(playerTwoNumbers);
+
+            for (int number : playerOne.getNumbers()) {
+                attempt++;
+                if (number == computerNumber) {
+                    System.out.println("Поздравляем, " + playerOne.getName() + ", вы угдалис с " + attempt + " попытки" );
+                    playerOneNumbers = Arrays.copyOf(playerOne.getNumbers(), attempt);
+                    System.out.print("Твои варианты: ");
+                    for (int i : playerOneNumbers) {
+                        System.out.print(i + " ");
+                    }
+                    System.out.println("");
+                    attempt = 0;
+                    break;
+                }
+            }
+
+            for (int number : playerTwo.getNumbers()) {
+                attempt++;
+                if (number == computerNumber) {
+                    System.out.println("Поздравляем, " + playerTwo.getName() + ", вы угдалис с " + attempt + " попытки" );
+                    playerTwoNumbers = Arrays.copyOf(playerTwo.getNumbers(), attempt);
+                    System.out.print("Твои варианты: ");
+                    for (int i : playerTwoNumbers) {
+                        System.out.print(i + " ");
+                    }
+                    System.out.println("");
+                    break;
+                }
+            }
+            break;
 		}
 	}
 
