@@ -5,19 +5,12 @@ import java.util.Scanner;
 public class CalculatorTest {
     public static void main(String[] args) {
         String answer;
-        String userInput;
-        int i;
-        String[] mathExpression = new String[3];
+        String[] mathExpression;
         Scanner scanner = new Scanner(System.in);
 
         do {
-            i = 0;
             System.out.print("Введите математическое выражение: ");
-            userInput = scanner.nextLine();
-            for (String symbol : userInput.split(" ")) {
-                mathExpression[i] = symbol;
-                i++;
-            }
+            mathExpression = scanner.nextLine().split(" ");
             Calculator calculator = new Calculator(mathExpression);
             calculator.calculate();
             do {
