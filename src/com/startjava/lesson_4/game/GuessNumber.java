@@ -29,6 +29,16 @@ public class GuessNumber {
         player.setNumbers(player.getNumber(), i);
     }
 
+    public void checkInput(int i) {
+        if (playerOne.getNumber() == computerNumber) {
+            playerOne.setAttempt(i + 1);
+            playerOne.setStatus(true);
+        } else if (playerTwo.getNumber() == computerNumber) {
+            playerTwo.setAttempt(i + 1);
+            playerTwo.setStatus(true);
+        }
+    }
+
     public void playerWin(Player player) {
         System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
         int[] playerOneNumbers = Arrays.copyOf(player.getNumbers(), player.getAttempt());
@@ -48,15 +58,7 @@ public class GuessNumber {
         for (int i = 0; i < 10; i++) {
             playerInput(playerOne, i);
             playerInput(playerTwo, i);
-
-            if (playerOne.getNumber() == computerNumber) {
-                playerOne.setAttempt(i + 1);
-                playerOne.setStatus(true);
-            } else if (playerTwo.getNumber() == computerNumber) {
-                playerTwo.setAttempt(i + 1);
-                playerTwo.setStatus(true);
-            }
-
+            checkInput(i);
             System.out.println("У вас осталось " + (9 - i) + " попыток");
         }
 
