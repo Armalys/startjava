@@ -49,6 +49,21 @@ public class GuessNumber {
         System.out.println();
     }
 
+    public void noWinner() {
+        System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " кончались попытки");
+        System.out.print(playerOne.getName() + ", твои варианты: ");
+        for (int number : playerOne.getNumbers()) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
+
+        System.out.print(playerTwo.getName() + ", твои варианты: ");
+        for (int number : playerTwo.getNumbers()) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
+    }
+
     public void gameStart() {
         setPlayerName();
         System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
@@ -71,18 +86,7 @@ public class GuessNumber {
             playerWin(playerTwo);
             playerTwo.setStatus(false);
         } else {
-            System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " кончались попытки");
-            System.out.print(playerOne.getName() + ", твои варианты: ");
-            for (int number : playerOne.getNumbers()) {
-                System.out.print(number + " ");
-            }
-            System.out.println();
-
-            System.out.print(playerTwo.getName() + ", твои варианты: ");
-            for (int number : playerTwo.getNumbers()) {
-                System.out.print(number + " ");
-            }
-            System.out.println();
+            noWinner();
         }
     }
 
