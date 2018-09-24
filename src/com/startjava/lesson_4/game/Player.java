@@ -6,16 +6,16 @@ public class Player {
 	private int[] numbers = new int[10];
     private int attempt;
     private boolean status;
-	
-	public Player(String name) {
-		this.name = name;
-	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getNumber() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getNumber() {
 		return number;
 	}
 

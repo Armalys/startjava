@@ -7,12 +7,12 @@ public class CalculatorTest {
         String answer;
         String[] mathExpression;
         Scanner scanner = new Scanner(System.in);
+        Calculator calculator = new Calculator();
 
         do {
             System.out.print("Введите математическое выражение: ");
             mathExpression = scanner.nextLine().split(" ");
-            Calculator calculator = new Calculator(mathExpression);
-            calculator.calculate();
+            calculator.calculate(mathExpression);
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");
                 answer = scanner.nextLine();
