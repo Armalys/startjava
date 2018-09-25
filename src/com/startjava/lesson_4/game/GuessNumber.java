@@ -22,7 +22,7 @@ public class GuessNumber {
         System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
         generateComputerNumber();
         System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
-        System.out.println(computerNumber);
+
         for (int i = 0; i < 10; i++) {
             playerInput(playerOne, i);
             playerInput(playerTwo, i);
