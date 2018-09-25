@@ -3,18 +3,18 @@ package com.startjava.lesson_4.game;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class GuessNumber {
+class GuessNumber {
     private Scanner scanner = new Scanner(System.in);
     private int computerNumber;
     private Player playerOne;
     private Player playerTwo;
 
-    public GuessNumber(Player playerOne, Player playerTwo) {
+    GuessNumber(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
     }
 
-    public void gameStart() {
+    void gameStart() {
         System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
         generateComputerNumber();
         System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
