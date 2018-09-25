@@ -11,10 +11,18 @@ public class GuessNumberTest {
 
 	public static void main(String[] args) {
 		do {
+		    setPlayerName();
 			guessNumber.gameStart();
             repeatGame();
 		} while (answer.equals("да"));
 	}
+
+	private static void setPlayerName() {
+        System.out.print("Введите имя первого игрока: ");
+        playerOne.setName(scanner.next());
+        System.out.print("Введите имя второго игрока: ");
+        playerTwo.setName(scanner.next());
+    }
 
     private static void repeatGame() {
         do {

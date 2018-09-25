@@ -15,10 +15,6 @@ public class GuessNumber {
     }
 
     public void gameStart() {
-        System.out.print("Введите имя первого игрока: ");
-        playerOne.setName(scanner.next());
-        System.out.print("Введите имя второго игрока: ");
-        playerTwo.setName(scanner.next());
         System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
         generateComputerNumber();
         System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
