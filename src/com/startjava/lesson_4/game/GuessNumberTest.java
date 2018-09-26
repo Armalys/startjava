@@ -7,17 +7,17 @@ public class GuessNumberTest {
     private static Scanner scanner = new Scanner(System.in);
     private static Player playerOne = new Player();
     private static Player playerTwo = new Player();
-    private static GuessNumber guessNumber = new GuessNumber(playerOne, playerTwo);
 
 	public static void main(String[] args) {
+        GuessNumber guessNumber = new GuessNumber(playerOne, playerTwo);
 		do {
-		    setPlayerName();
+		    selectPlayersName();
 			guessNumber.gameStart();
             repeatGame();
 		} while (answer.equals("да"));
 	}
 
-	private static void setPlayerName() {
+	private static void selectPlayersName() {
         System.out.print("Введите имя первого игрока: ");
         playerOne.setName(scanner.next());
         System.out.print("Введите имя второго игрока: ");
