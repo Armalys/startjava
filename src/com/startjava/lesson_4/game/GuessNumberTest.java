@@ -25,7 +25,7 @@ public class GuessNumberTest {
         playersNames[1] = scanner.next();
     }
 
-    public static GuessNumber initPlayers() {
+    private static GuessNumber initPlayers() {
         Player playerOne = new Player(playersNames[0]);
         Player playerTwo = new Player(playersNames[1]);
         return new GuessNumber(playerOne, playerTwo);
