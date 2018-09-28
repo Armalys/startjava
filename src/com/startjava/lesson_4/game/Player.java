@@ -7,13 +7,13 @@ public class Player {
     private int attempt;
     private boolean status;
 
-	public String getName() {
-		return name;
-	}
-
-    public void setName(String name) {
+    public Player(String name) {
         this.name = name;
     }
+
+    public String getName() {
+		return name;
+	}
 
     public int getNumber() {
 		return number;
@@ -39,7 +39,7 @@ public class Player {
         this.attempt = attempt;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

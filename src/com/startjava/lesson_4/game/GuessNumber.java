@@ -19,25 +19,10 @@ public class GuessNumber {
         System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
         generateComputerNumber();
         System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
+
+        playersInput();
         System.out.println("Правильный ответ: " + computerNumber);
-
-        for (int i = 0; i < numberOfAttempts; i++) {
-            System.out.println("У вас осталось " + (numberOfAttempts - i) + " попыток");
-            playerInput(playerOne, i);
-            playerInput(playerTwo, i);
-            checkInput(playerOne, i);
-            checkInput(playerTwo, i);
-        }
-
-        System.out.println("Правильный ответ: " + computerNumber);
-
-        if (playerOne.isStatus()) {
-            playerWin(playerOne);
-        } else if (playerTwo.isStatus()) {
-            playerWin(playerTwo);
-        } else {
-            noWinner();
-        }
+        chekWinner();
     }
 
     private void resetToDefault() {
@@ -52,6 +37,16 @@ public class GuessNumber {
         computerNumber = (int) (Math.random() * 101);
     }
 
+    private void playersInput() {
+        for (int i = 0; i < numberOfAttempts; i++) {
+            System.out.println("У вас осталось " + (numberOfAttempts - i) + " попыток");
+            playerInput(playerOne, i);
+            playerInput(playerTwo, i);
+            checkInput(playerOne, i);
+            checkInput(playerTwo, i);
+        }
+    }
+
     private void playerInput(Player player, int i) {
         System.out.print(player.getName() + ", твоя попытка: ");
         player.setNumber(scanner.nextInt());
@@ -62,6 +57,16 @@ public class GuessNumber {
         if (player.getNumber() == computerNumber) {
             player.setAttempt(i + 1);
             player.setStatus(true);
+        }
+    }
+
+    private void chekWinner() {
+        if (playerOne.getStatus()) {
+            playerWin(playerOne);
+        } else if (playerTwo.getStatus()) {
+            playerWin(playerTwo);
+        } else {
+            noWinner();
         }
     }
 

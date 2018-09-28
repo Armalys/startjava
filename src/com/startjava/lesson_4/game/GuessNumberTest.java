@@ -3,32 +3,40 @@ package com.startjava.lesson_4.game;
 import java.util.Scanner;
 
 public class GuessNumberTest {
-    private static String answer;
+
     private static Scanner scanner = new Scanner(System.in);
-    private static Player playerOne = new Player();
-    private static Player playerTwo = new Player();
+    private static String[] playersNames = new String[2];
+    private static String answer;
 
 	public static void main(String[] args) {
-        GuessNumber guessNumber = new GuessNumber(playerOne, playerTwo);
+        entersName();
+        GuessNumber guessNumber = initPlayers();
 		do {
-		    selectPlayersName();
-			guessNumber.gameStart();
+            initPlayers();
+            guessNumber.gameStart();
             repeatGame();
 		} while (answer.equals("да"));
 	}
 
-	private static void selectPlayersName() {
+	private static void entersName() {
         System.out.print("Введите имя первого игрока: ");
-        playerOne.setName(scanner.next());
+        playersNames[0] = scanner.next();
         System.out.print("Введите имя второго игрока: ");
-        playerTwo.setName(scanner.next());
+        playersNames[1] = scanner.next();
     }
 
-    private static void repeatGame() {
+    public static GuessNumber initPlayers() {
+        Player playerOne = new Player(playersNames[0]);
+        Player playerTwo = new Player(playersNames[1]);
+        return new GuessNumber(playerOne, playerTwo);
+    }
+
+    private static String repeatGame() {
         do {
             System.out.print("Хотите продолжить? [да/нет]: ");
             answer = scanner.next();
         } while (!answer.equals("да") && !answer.equals("нет"));
+        return answer;
     }
 
 }
