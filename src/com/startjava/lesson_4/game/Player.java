@@ -19,13 +19,10 @@ public class Player {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(int number, int i) {
 		this.number = number;
+		this.numbers[i] = number;
 	}
-
-    public void setNumbers(int numbers, int i) {
-        this.numbers[i] = numbers;
-    }
 
     public int[] getNumbers() {
         return numbers;

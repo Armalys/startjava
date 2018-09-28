@@ -16,13 +16,11 @@ public class GuessNumber {
 
     public void gameStart() {
         resetToDefault();
-        System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
         generateComputerNumber();
-        System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
-
-        playersInput();
+        displayInfo();
+        inputNumber();
         System.out.println("Правильный ответ: " + computerNumber);
-        chekWinner();
+        checkWinner();
     }
 
     private void resetToDefault() {
@@ -37,30 +35,39 @@ public class GuessNumber {
         computerNumber = (int) (Math.random() * 101);
     }
 
-    private void playersInput() {
+    private void displayInfo() {
+        System.out.println("Привет, " + playerOne.getName() + " и " + playerTwo.getName());
+        System.out.println("Компьютер загадал число, у вас есть 10 попыток, чтобы его отгадать");
+    }
+
+    private void inputNumber() {
         for (int i = 0; i < numberOfAttempts; i++) {
             System.out.println("У вас осталось " + (numberOfAttempts - i) + " попыток");
             playerInput(playerOne, i);
             playerInput(playerTwo, i);
-            checkInput(playerOne, i);
-            checkInput(playerTwo, i);
+            checkNumber(playerOne, i);
+            checkNumber(playerTwo, i);
         }
     }
 
     private void playerInput(Player player, int i) {
         System.out.print(player.getName() + ", твоя попытка: ");
-        player.setNumber(scanner.nextInt());
-        player.setNumbers(player.getNumber(), i);
+        player.setNumber(scanner.nextInt(), i);
+        if (player.getNumber() < computerNumber) {
+            System.out.println("Загаданное число больше того, что загадал компьютер");
+        } else if (player.getNumber() > computerNumber) {
+            System.out.println("Загаданное число меньше, что загадал компьютер");
+        }
     }
 
-    private void checkInput(Player player, int i) {
+    private void checkNumber(Player player, int i) {
         if (player.getNumber() == computerNumber) {
             player.setAttempt(i + 1);
             player.setStatus(true);
         }
     }
 
-    private void chekWinner() {
+    private void checkWinner() {
         if (playerOne.getStatus()) {
             playerWin(playerOne);
         } else if (playerTwo.getStatus()) {
