@@ -1,6 +1,5 @@
 package com.startjava.lesson_4.game;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumber {
@@ -9,7 +8,6 @@ public class GuessNumber {
     private Player playerOne;
     private Player playerTwo;
     private int numberOfAttempts;
-    private int[] numbersOfWinner;
 
     public GuessNumber(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
@@ -26,10 +24,9 @@ public class GuessNumber {
     }
 
     private void resetToDefault() {
-        numbersOfWinner = new int[10];
         numberOfAttempts = 10;
-        playerOne.setAttempt(0);
-        playerTwo.setAttempt(0);
+        playerOne.setAttempt(10);
+        playerTwo.setAttempt(10);
         playerOne.setStatus(false);
         playerTwo.setStatus(false);
     }
@@ -62,48 +59,38 @@ public class GuessNumber {
         if (player.getNumber() == computerNumber) {
             player.setAttempt(i + 1);
             player.setStatus(true);
-            rememberNumbers(player, i);
         } else if (player.getNumber() < computerNumber) {
-            System.out.println("Введенное число больше того, что загадал компьютер");
+            System.out.println("Загаданное число больше");
         } else if (player.getNumber() > computerNumber) {
-            System.out.println("Введенное число меньше, что загадал компьютер");
+            System.out.println("Загаданное число меньше");
         }
     }
 
-    private void rememberNumbers(Player player, int i) {
-        numbersOfWinner = Arrays.copyOf(player.getNumbers(), i);
-    }
-
     private void checkWinner() {
-        if (playerOne.getStatus()) {
+        if (playerOne.getStatus() && playerTwo.getStatus()) {
+            playerWin(playerOne);
+            playerWin(playerTwo);
+        } else if (playerOne.getStatus()) {
             playerWin(playerOne);
         } else if (playerTwo.getStatus()) {
             playerWin(playerTwo);
         } else {
-            lose();
+            noOneGuessedNumber();
         }
     }
 
     private void playerWin(Player player) {
         System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
-        showWinnerSelectedNumbers(player);
+        showSelectedNumbers(player);
     }
 
-    private void lose() {
+    private void noOneGuessedNumber() {
         System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " кончались попытки");
-        showAllSelectedNumbers(playerOne);
-        showAllSelectedNumbers(playerTwo);
+        showSelectedNumbers(playerOne);
+        showSelectedNumbers(playerTwo);
     }
 
-    private void showWinnerSelectedNumbers(Player player) {
-        System.out.print(player.getName() + ", твои варианты: ");
-        for (int number : numbersOfWinner) {
-            System.out.print(number + " ");
-        }
-        System.out.println();
-    }
-
-    private void showAllSelectedNumbers(Player player) {
+    private void showSelectedNumbers(Player player) {
         System.out.print(player.getName() + ", твои варианты: ");
         for (int number : player.getNumbers()) {
             System.out.print(number + " ");
