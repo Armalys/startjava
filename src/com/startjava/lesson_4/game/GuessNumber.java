@@ -72,13 +72,9 @@ public class GuessNumber {
             System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
             showSelectedNumbers(player);
         } else {
-            noGuessedNumber(player);
+            System.out.println("У " + player.getName() + " кончались попытки");
+            showSelectedNumbers(player);
         }
-    }
-
-    private void noGuessedNumber(Player player) {
-        System.out.println("У " + player.getName() + " кончались попытки");
-        showSelectedNumbers(player);
     }
 
     private void showSelectedNumbers(Player player) {
