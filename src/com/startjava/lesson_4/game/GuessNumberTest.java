@@ -11,7 +11,6 @@ public class GuessNumberTest {
         enterNames(playersNames);
         GuessNumber guessNumber = initPlayers(playersNames);
         do {
-            initPlayers(playersNames);
             guessNumber.gameStart();
 		} while (repeatGame().equals("да"));
 	}

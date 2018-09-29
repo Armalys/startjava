@@ -1,5 +1,6 @@
 package com.startjava.lesson_4.game;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumber {
@@ -8,6 +9,7 @@ public class GuessNumber {
     private Player playerOne;
     private Player playerTwo;
     private int numberOfAttempts;
+    private int[] numbersOfWinner;
 
     public GuessNumber(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
@@ -24,6 +26,7 @@ public class GuessNumber {
     }
 
     private void resetToDefault() {
+        numbersOfWinner = new int[10];
         numberOfAttempts = 10;
         playerOne.setAttempt(0);
         playerTwo.setAttempt(0);
@@ -44,8 +47,8 @@ public class GuessNumber {
         for (int i = 0; i < numberOfAttempts; i++) {
             System.out.println("У вас осталось " + (numberOfAttempts - i) + " попыток");
             playerInput(playerOne, i);
-            playerInput(playerTwo, i);
             checkNumber(playerOne, i);
+            playerInput(playerTwo, i);
             checkNumber(playerTwo, i);
         }
     }
@@ -53,18 +56,22 @@ public class GuessNumber {
     private void playerInput(Player player, int i) {
         System.out.print(player.getName() + ", твоя попытка: ");
         player.setNumber(scanner.nextInt(), i);
-        if (player.getNumber() < computerNumber) {
-            System.out.println("Загаданное число больше того, что загадал компьютер");
-        } else if (player.getNumber() > computerNumber) {
-            System.out.println("Загаданное число меньше, что загадал компьютер");
-        }
     }
 
     private void checkNumber(Player player, int i) {
         if (player.getNumber() == computerNumber) {
             player.setAttempt(i + 1);
             player.setStatus(true);
+            rememberNumbers(player, i);
+        } else if (player.getNumber() < computerNumber) {
+            System.out.println("Введенное число больше того, что загадал компьютер");
+        } else if (player.getNumber() > computerNumber) {
+            System.out.println("Введенное число меньше, что загадал компьютер");
         }
+    }
+
+    private void rememberNumbers(Player player, int i) {
+        numbersOfWinner = Arrays.copyOf(player.getNumbers(), i);
     }
 
     private void checkWinner() {
@@ -73,28 +80,33 @@ public class GuessNumber {
         } else if (playerTwo.getStatus()) {
             playerWin(playerTwo);
         } else {
-            noWinner();
+            lose();
         }
     }
 
     private void playerWin(Player player) {
         System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
-        showSelectedNumbers(player);
+        showWinnerSelectedNumbers(player);
     }
 
-    private void noWinner() {
+    private void lose() {
         System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " кончались попытки");
-        showSelectedNumbers(playerOne);
-        showSelectedNumbers(playerTwo);
+        showAllSelectedNumbers(playerOne);
+        showAllSelectedNumbers(playerTwo);
     }
 
-    private void showSelectedNumbers(Player player) {
+    private void showWinnerSelectedNumbers(Player player) {
+        System.out.print(player.getName() + ", твои варианты: ");
+        for (int number : numbersOfWinner) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
+    }
+
+    private void showAllSelectedNumbers(Player player) {
         System.out.print(player.getName() + ", твои варианты: ");
         for (int number : player.getNumbers()) {
             System.out.print(number + " ");
-            if (number == computerNumber) {
-                break;
-            }
         }
         System.out.println();
     }
