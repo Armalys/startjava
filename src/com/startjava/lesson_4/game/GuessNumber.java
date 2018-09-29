@@ -20,7 +20,8 @@ public class GuessNumber {
         displayInfo();
         inputNumber();
         System.out.println("Правильный ответ: " + computerNumber);
-        checkWinner();
+        checkWinner(playerOne);
+        checkWinner(playerTwo);
     }
 
     private void resetToDefault() {
@@ -66,31 +67,20 @@ public class GuessNumber {
         }
     }
 
-    private void checkWinner() {
-        if (playerOne.getStatus() && playerTwo.getStatus()) {
-            playerWin(playerOne);
-            playerWin(playerTwo);
-        } else if (playerOne.getStatus()) {
-            playerWin(playerOne);
-        } else if (playerTwo.getStatus()) {
-            playerWin(playerTwo);
+    private void checkWinner(Player player) {
+        if (player.getStatus()) {
+            showSelectedNumbers(player);
         } else {
-            noOneGuessedNumber();
+            noGuessedNumber(player);
         }
     }
 
-    private void playerWin(Player player) {
-        System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
-        showSelectedNumbers(player);
-    }
-
-    private void noOneGuessedNumber() {
-        System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " кончались попытки");
-        showSelectedNumbers(playerOne);
-        showSelectedNumbers(playerTwo);
+    private void noGuessedNumber(Player player) {
+        System.out.println("У " + player.getName() + " кончались попытки");
     }
 
     private void showSelectedNumbers(Player player) {
+        System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
         System.out.print(player.getName() + ", твои варианты: ");
         for (int number : player.getNumbers()) {
             System.out.print(number + " ");
