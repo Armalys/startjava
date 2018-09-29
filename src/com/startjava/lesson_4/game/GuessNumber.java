@@ -70,11 +70,10 @@ public class GuessNumber {
     private void checkWinner(Player player) {
         if (player.getStatus()) {
             System.out.println("Поздравляем, " + player.getName() + ", ты угадал число с " + player.getAttempt() + " попытки");
-            showSelectedNumbers(player);
         } else {
             System.out.println("У " + player.getName() + " кончались попытки");
-            showSelectedNumbers(player);
         }
+        showSelectedNumbers(player);
     }
 
     private void showSelectedNumbers(Player player) {
