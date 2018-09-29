@@ -78,7 +78,7 @@ public class GuessNumber {
 
     private void noGuessedNumber(Player player) {
         System.out.println("У " + player.getName() + " кончались попытки");
-        showSelectedNumbers(player)
+        showSelectedNumbers(player);
     }
 
     private void showSelectedNumbers(Player player) {
