@@ -1,3 +1,7 @@
+\l
+\CREATE DATABASE jaegers;
+\l
+\connect jaegers;
 CREATE TABLE Jaegers (
 	id			SERIAL PRIMARY KEY,
 	modelName	TEXT,

@@ -1,11 +1,11 @@
 SELECT * FROM Jaegers;
 SELECT * FROM Jaegers;
-SELECT * FROM Jaegers WHERE status = "Active";
-SELECT * FROM Jaegers WHERE mark = "Mark-1" and "Mark-6";
-SELECT * FROM Jaegers ORDER BY mark DESK;
+SELECT * FROM Jaegers WHERE status = 'Active';
+SELECT * FROM Jaegers WHERE mark = 'Mark-1';
+SELECT * FROM Jaegers ORDER BY mark DESC;
 SELECT * FROM Jaegers WHERE launch = (SELECT MIN(launch) FROM Jaeger);
-SELECT * FROM Jaegers WHERE kaijuKill = (SELECT MAX(kaijuKill) FROM Jaeger);
-SELECT * FROM Jaegers WHERE kaijuKill = (SELECT MIN(kaijuKill) FROM Jaeger);
+SELECT * FROM Jaegers WHERE kaijuKill = (SELECT MAX(kaijuKill) FROM Jaegers);
+SELECT * FROM Jaegers WHERE kaijuKill = (SELECT MIN(kaijuKill) FROM Jaegers);
 SELECT AVG(weight) FROM Jaegers;
-UPDATE Jaegers SET kaijuKill = kaijuKill + 1 WHERE status = "Active";
-DELETE FROM Jaegers WHERE status = "Destroyed";
+UPDATE Jaegers SET kaijuKill = kaijuKill + 1 WHERE status = 'Active';
+DELETE FROM Jaegers WHERE status = 'Destroyed';
